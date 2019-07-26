@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Invoicebus Invoice Template">
+    <meta name="author" content="Invoicebus">
+
+    <meta name="template-hash" content="f3142bbb0a1696d5caa932ecab0fc530">
+
+
+    <style>
+        /*! Invoice Templates @author: Invoicebus @email: info@invoicebus.com @web: https://invoicebus.com @version: 1.0.0 @updated: 2015-03-09 09:03:07 @license: Invoicebus */
+        /* Reset styles */
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        html {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        table {
+            border-width:1px;
+            border-style:solid;
+            border-color:black;
+            width:100%;
+        }
+         th {
+            border:1px solid black;
+             background-color: #8b8b8b;
+        }
+        td {
+            border:1px solid black;
+
+            text-align:center;
+
+        }
+
+
+
+        q, blockquote {
+            quotes: none;
+        }
+
+        q:before, q:after, blockquote:before, blockquote:after {
+            content: "";
+            content: none;
+        }
+
+        a img {
+            border: none;
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+            display: block;
+        }
+
+        /* Invoice styles */
+        /**
+         * DON'T override any styles for the <html> and <body> tags, as this may break the layout.
+         * Instead wrap everything in one main <div id="container"> element where you may change
+         * something like the font or the background of the invoice
+         */
+        html, body {
+            /* MOVE ALONG, NOTHING TO CHANGE HERE! */
+        }
+
+        /**
+         * IMPORTANT NOTICE: DON'T USE '!important' otherwise this may lead to broken print layout.
+         * Some browsers may require '!important' in oder to work properly but be careful with it.
+         */
+        .clearfix {
+            display: block;
+            clear: both;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        b, strong, .bold {
+            font-weight: bold;
+        }
+
+        #container {
+            font: normal 13px/1.4em 'Open Sans', Sans-serif;
+            margin: 0 auto;
+            padding: 50px 40px;
+            min-height: 1058px;
+        }
+
+        #memo .company-name {
+            background: #487774 560px center no-repeat;
+            background-size: 100px auto;
+            padding: 10px 20px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        #memo .company-name span {
+            color: white;
+            display: inline-block;
+            min-width: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1em;
+        }
+
+        #memo .company-name .right-arrow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100px;
+            background: right center no-repeat;
+            background-size: auto 60px;
+        }
+
+        #memo .logo {
+            float: left;
+            clear: left;
+            margin-left: 20px;
+        }
+
+        #memo .logo img {
+            width: 150px;
+            height: 100px;
+        }
+
+        #memo .company-info {
+            margin-left: 20px;
+            float: left;
+            font-size: 12px;
+            color: #8b8b8b;
+        }
+
+        #memo .company-info div {
+            margin-bottom: 3px;
+            min-width: 20px;
+        }
+
+        #memo .company-info span {
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        #memo:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        #invoice-info {
+            float: left;
+            margin: 25px 0 0 20px;
+        }
+
+        #invoice-info > div {
+            float: left;
+        }
+
+        #invoice-info > div > span {
+            display: block;
+            min-width: 20px;
+            min-height: 18px;
+            margin-bottom: 3px;
+        }
+
+        #invoice-info > div:last-child {
+            margin-left: 20px;
+        }
+
+        #invoice-info:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        #client-info {
+            float: right;
+            margin: 5px 20px 0 0;
+            min-width: 220px;
+            text-align: right;
+        }
+
+        #client-info > div {
+            margin-bottom: 3px;
+            min-width: 20px;
+        }
+
+        #client-info span {
+            display: block;
+            min-width: 20px;
+        }
+
+        #invoice-title-number {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #invoice-title-number span {
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        #invoice-title-number #title {
+            margin-right: 15px;
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #invoice-title-number #number {
+            font-size: 15px;
+            text-align: left;
+        }
+
+
+
+
+
+        #items {
+            margin: 20px 0 35px 0;
+        }
+
+
+
+
+
+
+
+        .currency {
+            border-bottom: 4px solid #487774;
+            padding: 0 20px;
+        }
+
+        .currency span {
+            font-size: 11px;
+            font-style: italic;
+            color: #8b8b8b;
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        #sums {
+            float: right;
+            background: #487774 -17px bottom no-repeat;
+            background-size: auto 100px;
+            color: white;
+        }
+
+
+
+
+
+
+        #terms {
+            margin: 50px 20px 10px 20px;
+        }
+
+        #terms > span {
+            display: inline-block;
+            min-width: 20px;
+            font-weight: bold;
+        }
+
+        #terms > div {
+            margin-top: 10px;
+            min-height: 50px;
+            min-width: 50px;
+        }
+
+        .payment-info {
+            margin: 0 20px;
+        }
+
+        .payment-info div {
+            font-size: 12px;
+            color: #8b8b8b;
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        .ib_bottom_row_commands {
+            margin: 10px 0 0 20px !important;
+        }
+
+        .ibcl_tax_value:before {
+            color: white !important;
+        }
+
+        /**
+         * If the printed invoice is not looking as expected you may tune up
+         * the print styles (you can use !important to override styles)
+         */
+        @media print {
+            /* Here goes your print styles */
+        }
+
+    </style>
+
+
+    <Script type='text/javascript'>
+
+        function preciseRound(num, dec){
+
+            if ((typeof num !== 'number') || (typeof dec !== 'number'))
+                return false;
+
+            var num_sign = num >= 0 ? 1 : -1;
+
+            return (Math.round((num*Math.pow(10,dec))+(num_sign*0.0001))/Math.pow(10,dec)).toFixed(dec);
+        }
+
+    </Script>
+
+</head>
+
+<body>
+
+<div id="container">
+
+    <section>  [(${date})]</section>
+    <section id="memo">
+        <div class="company-name">
+            <span>Title Project : [(${nameProjet})]</span>
+            <div class="right-arrow"></div>
+        </div>
+
+        <div class="logo">
+            <img data-logo=""/>
+        </div>
+
+        <div class="company-info">
+            <div>
+                <span th:if="${user != null }">Created by : [(${user.firstName})] [(${user.lastName})]</span>
+            </div>
+            <div>Type : [(${type})] </div>
+            <div>Departement : [(${departement})]</div>
+            <div></div>
+        </div>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+    <section id="invoice-title-number">
+
+        <span id="title">Undesirable Events </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${undesirableEvents}">
+                <td width="30%">[(${item.code})]</td>
+                <td width="70%">[(${item.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+
+    <section id="invoice-title-number">
+
+        <span id="title">Factors </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${factors}">
+                <td width="30%">[(${item.code})]</td>
+                <td width="70%">[(${item.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+    <section id="invoice-title-number">
+
+        <span id="title">sources of dangers </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section data-iterate="item" th:each="item, iterator : ${factors}">
+        <section id="invoice-title-number">
+
+            <span id="title"> [(${item.code})]</span>
+            <span id="number"></span>
+
+        </section>
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item1" th:each="item1, iterator : ${item.sourceDangers}">
+                <td width="30%">[(${item1.code})]</td>
+                <td width="70%">[(${item1.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+
+
+    <section id="invoice-title-number">
+
+        <span id="title">Impacts </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${impacts}">
+                <td width="30%">[(${item.code})]</td>
+                <td width="70%">[(${item.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+
+    <section id="invoice-title-number">
+
+        <span id="title">Probability Scale </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th colspan="2" width="70%">Relative concentration of risk	</th>
+                <th width="30%">Probability of occurrence	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${proba.intervalScales}">
+                <td width="35%">[(${item.min})]</td>
+                <td width="35%">[(${item.max})]</td>
+                <td width="30%">[(${item.valeur})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+    <div class="clearfix"></div>
+
+    <section id="invoice-title-number">
+
+        <span id="title">Estimation of Impact </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th ></th>
+                <th data-iterate="im" th:each="im, iterator : ${impacts}" >Impact : [(${im.code})]	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${event} ">
+
+                <th>[(${item.undesirableEvent.code})]</th>
+                <td data-iterate="im" th:each="im, iterator : ${impacts}"  >[(${item.estimationImpact[im.id]})]</td>
+
+
+            </tr>
+
+        </table>
+
+    </section>
+    <section id="invoice-title-number">
+
+        <span id="title">Les Matrices AHP</span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section data-iterate="item" th:each="item, iteratorEv : ${event} " >
+        <section id="invoice-title-number">
+
+            <span id="title">[(${item.undesirableEvent.code})]</span>
+            <span id="number"></span>
+
+        </section>
+        <table >
+            <thead>
+            <tr>
+                <th> </th>
+
+                <th data-iterate="f" th:each="f, iterator : ${factors} " >[(${f.code})]</th>
+                <th>Weight</th>
+            </tr>
+            </thead>
+            <tbody data-iterate="f" th:each="f, iterator : ${factors} " >
+            <tr >
+                <th>[(${f.code})]</th>
+                <td   data-iterate="fi" th:each="fi, iterator1 : ${factors} "  >
+
+                        <span  class="center-pill">[(${item.mtx[iterator.index][iterator1.index]})]</span>
+
+
+                </td>
+                <td>[(${item.weights[iterator.index]})]</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+    </section>
+    <section>
+    <section id="invoice-title-number">
+
+        <span id="title"> Calculation of the risk factor concentration  </span>
+        <p></p>
+        <span id="title">for each undesirable event</span>
+    </section>
+        <table >
+            <thead>
+            <tr>
+                <th>Undesirable event</th>
+                <th>Linked risk factor category</th>
+                <th>Factors of category Xi</th>
+                <th>Weighting:Yi</th>
+                <th>Xi*Yi</th>
+                <th>Fraction of total Eq</th>
+                <th>Probability of Occurence</th>
+                <th>Max Impact</th>
+                <th>Level of Risk</th>
+            </tr>
+            </thead>
+            <tbody   data-iterate="ev" th:each="ev, iterator : ${event} " >
+
+            <tr >
+                <td th:rowspan="${ev.factorProjets.size()+2}" >[(${ev.undesirableEvent.code})]</td>
+
+            </tr>
+            <tr data-iterate="f" th:each="f, iterator1 : ${ev.factorProjets} ">
+                <td>[(${f.factor.code})]</td>
+                <td>[(${f.sourceDangers.size()})]</td>
+                <td >[(${rank[f.factor.id]})]</td>
+                <td >[(${f.XY})]</td>
+                <td >--</td>
+                <td >--</td>
+                <td >--</td>
+                <td >--</td>
+
+            </tr>
+
+            <tr >
+                <td></td>
+                <td></td>
+
+                <td >Sub-Total [(${ev.undesirableEvent.code})]</td>
+                <td >[(${ev.XY})]</td>
+                <td >[(${ev.fractionTotal})]</td>
+                <td > [(${ev.probabilityOccurence})] </td>
+                <td > [(${ev.maxImpact})] </td>
+                <td > [(${ev.levelRisk})]</td>
+
+            </tr>
+
+            </tbody>
+            <tr >
+                <td></td>
+                <td></td>
+                <td></td>
+                <td >Total</td>
+                <td >[(${XY})]</td>
+                <td >100 %</td>
+
+            </tr>
+        </table>
+    </section>
+
+
+    <section  >
+        <section id="invoice-title-number">
+
+            <span id="title">Result :</span>
+            <span id="number">Limit ACCEPT = [(${limitAccept})]</span>
+
+        </section>
+        <table >
+            <thead>
+            <tr>
+                <th colspan="2"><h2>Accepted Risks </h2> </th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr >
+               <th>Code</th>
+                <th>Description</th>
+
+            </tr>
+
+            <tr data-iterate="ea" th:each="ea, iterator : ${accept} ">
+                <th>[(${ea.undesirableEvent.code})]</th>
+                <th>[(${ea.undesirableEvent.description})]</th>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+    </section>
+    <section  >
+        <section id="invoice-title-number">
+
+            <span id="title"></span>
+            <span id="number"></span>
+
+        </section>
+    <table  >
+        <thead>
+        <tr>
+            <th colspan="2"><h2>Risks to be reduced </h2> </th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr >
+            <th>Code</th>
+            <th>Description</th>
+
+        </tr>
+
+        <tr data-iterate="ea" th:each="ea, iterator : ${nonAccept} ">
+            <th>[(${ea.undesirableEvent.code})]</th>
+            <th>[(${ea.undesirableEvent.description})]</th>
+
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    </section>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+
+
+
+
+</div>
+
+</body>
+</html>
