@@ -72,10 +72,13 @@ public class UserController {
 
         for(int i=0;i<files.size();i++){
             File file=files.get(i);
+                        if(file.getUserGener()!=null) {
+
             if(file.getUserGener().getUsername().equals(username)){
                 file.setUserGener(null);
                 fileRepository.save(file);
             }
+                        }
 
         }
         appUserRepository.delete(appUserRepository.findByUsername(username));
