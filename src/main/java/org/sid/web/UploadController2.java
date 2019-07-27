@@ -87,6 +87,7 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
 
 		String path="upload-dir/"+nom.replace(' ','-')+"."+extension;
 		File file=new File(path);
+		System.out.println(file);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
 		return ResponseEntity.ok()
