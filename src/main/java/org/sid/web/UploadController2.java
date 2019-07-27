@@ -85,7 +85,7 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
 		//il faut modifier ce path le jour ou tu vas déploier ton app sur un serveur
 			String nameFile=nom+".pdf";
 
-		String path="C:/Users/benelgha/Downloads/BE v3/sec-service/upload-dir/"+nom.replace(' ','-')+"."+extension;
+		String path="upload-dir/"+nom.replace(' ','-')+"."+extension;
 		File file=new File(path);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
