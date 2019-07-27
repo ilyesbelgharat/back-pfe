@@ -44,7 +44,7 @@ public class UploadController {
 			storageService.store(file);
 			files.add(file.getOriginalFilename());
 			//c'est aussi prouvesoir
-		   s1="https://ilyesapprisk.herokuapp.com/";
+		   s1="https://ilyesapprisk.herokuapp.com/image/";
 	   
 	           s=s1+file.getOriginalFilename().replace('.','/');
 			
