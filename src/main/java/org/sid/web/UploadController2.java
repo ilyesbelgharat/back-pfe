@@ -65,7 +65,7 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
         throws IOException, URISyntaxException {
 	//il faut modifier ce path le jour ou tu vas déploier ton app sur un serveur
 
-	String path="C:/Users/benelgha/Downloads/BE v3/sec-service/upload-dir/"+nom+"."+extension;
+	String path="upload-dir/"+nom+"."+extension;
 
 
     BufferedImage image = ImageIO
