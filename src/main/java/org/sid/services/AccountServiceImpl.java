@@ -64,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
         appUserRepository.save(appUser);
         System.out.println("33333333333");
 
-        addRoleToUser(username,"USER");
+        addRoleToUser(username,"ADMIN");
         System.out.println("444444444444444444");
 
         return appUserRepository.save(appUser);
