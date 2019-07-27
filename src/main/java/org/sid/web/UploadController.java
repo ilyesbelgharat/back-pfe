@@ -43,7 +43,7 @@ public class UploadController {
 			storageService.store(file);
 			files.add(file.getOriginalFilename());
 			//c'est aussi prouvesoir
-		   s="http://localhost:8080/image/"+file.getOriginalFilename().replace('.','/');
+		   s="/"+file.getOriginalFilename().replace('.','/');
 			//s=file.getOriginalFilename();
 			image.setPath(s);
 			System.out.println("imaaaaaaaaaaaaaaaa");
