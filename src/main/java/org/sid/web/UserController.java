@@ -1,6 +1,9 @@
 package org.sid.web;
 
 import lombok.Data;
+import org.sid.dao.FileRepository;
+import org.sid.entities.*;
+
 import org.sid.dao.AppUserRepository;
 import org.sid.entities.AppUser;
 import org.sid.entities.Photo;
@@ -59,9 +62,22 @@ public class UserController {
         return appUserRepository.findAll();
     }
 
+    
+    @Autowired
+    private FileRepository fileRepository;
     @RequestMapping(value="/users/{username}" ,method=RequestMethod.DELETE)
     public boolean supprimer(@PathVariable String username){
         System.out.println(username);
+            List<File> files=fileRepository.findAll();
+
+        for(int i=0;i<files.size();i++){
+            File file=files.get(i);
+            if(file.getUserGener().getUsername().equals(username)){
+                file.setUserGener(null);
+                fileRepository.save(file);
+            }
+
+        }
         appUserRepository.delete(appUserRepository.findByUsername(username));
         //utilisateurRepository.deleteById(username);
         return true;
