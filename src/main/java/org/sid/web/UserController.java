@@ -36,7 +36,7 @@ public class UserController {
         appRole1.setRoleName("USER");
         appRoleRepository.save(appRole1);
         
-        return accountService.saveUser("admin1", "1234", "1234", " " , " ", " ", " ", null, null);
+        return accountService.saveUser("badri", "1234", "1234", " " , " ", " ", " ", null, null);
     
     }
     
