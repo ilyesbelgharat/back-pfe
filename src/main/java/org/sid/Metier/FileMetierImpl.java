@@ -55,7 +55,7 @@ private ProjetRepository projetRepository;
             storageService.store(file);
             files.add(file.getOriginalFilename());
             //c'est aussi prouvesoir
-            s="http://ilyesapprisk/herokuapp/com/files/" + file.getOriginalFilename().replace('.','/').replace(' ','-');
+            s="/files/" + file.getOriginalFilename().replace('.','/').replace(' ','-');
             //s=file.getOriginalFilename();
             f.setPath(s);
 f.setFileName(file.getOriginalFilename());
