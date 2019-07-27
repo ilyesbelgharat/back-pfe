@@ -363,15 +363,380 @@
             <div>
                 <span th:if="${user != null }">Created by : [(${user.firstName})] [(${user.lastName})]</span>
             </div>
-            
-                 <div>Type : [(${type})] </div>
-                 <div>Departement : [(${departement})]</div>
-                 <div></div>
-         </div>
+            <div>Type : [(${type})] </div>
+            <div>Departement : [(${departement})]</div>
+            <div></div>
+        </div>
 
     </section>
 
-   
+
+    <div class="clearfix"></div>
+    <section id="invoice-title-number">
+
+        <span id="title">Undesirable Events </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${undesirableEvents}">
+                <td width="30%">[(${item.code})]</td>
+                <td width="70%">[(${item.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+
+    <section id="invoice-title-number">
+
+        <span id="title">Factors </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${factors}">
+                <td width="30%">[(${item.code})]</td>
+                <td width="70%">[(${item.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+    <section id="invoice-title-number">
+
+        <span id="title">sources of dangers </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section data-iterate="item" th:each="item, iterator : ${factors}">
+        <section id="invoice-title-number">
+
+            <span id="title"> [(${item.code})]</span>
+            <span id="number"></span>
+
+        </section>
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item1" th:each="item1, iterator : ${item.sourceDangers}">
+                <td width="30%">[(${item1.code})]</td>
+                <td width="70%">[(${item1.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+
+
+    <section id="invoice-title-number">
+
+        <span id="title">Impacts </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th  width="30%">Code	</th>
+                <th width="70%">Description	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${impacts}">
+                <td width="30%">[(${item.code})]</td>
+                <td width="70%">[(${item.description})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <div class="clearfix"></div>
+
+    <section id="invoice-title-number">
+
+        <span id="title">Probability Scale </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th colspan="2" width="70%">Relative concentration of risk	</th>
+                <th width="30%">Probability of occurrence	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${proba.intervalScales}">
+                <td width="35%">[(${item.min})]</td>
+                <td width="35%">[(${item.max})]</td>
+                <td width="30%">[(${item.valeur})]</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+    <div class="clearfix"></div>
+
+    <section id="invoice-title-number">
+
+        <span id="title">Estimation of Impact </span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section >
+
+        <table >
+
+            <tr>
+                <th ></th>
+                <th data-iterate="im" th:each="im, iterator : ${impacts}" >Impact : [(${im.code})]	</th>
+            </tr>
+
+            <tr data-iterate="item" th:each="item, iterator : ${event} ">
+
+                <th>[(${item.undesirableEvent.code})]</th>
+                <td data-iterate="im" th:each="im, iterator : ${impacts}"  >[(${item.estimationImpact[im.id]})]</td>
+
+
+            </tr>
+
+        </table>
+
+    </section>
+    <section id="invoice-title-number">
+
+        <span id="title">Les Matrices AHP</span>
+        <span id="number"></span>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section data-iterate="item" th:each="item, iteratorEv : ${event} " >
+        <section id="invoice-title-number">
+
+            <span id="title">[(${item.undesirableEvent.code})]</span>
+            <span id="number"></span>
+
+        </section>
+        <table >
+            <thead>
+            <tr>
+                <th> </th>
+
+                <th data-iterate="f" th:each="f, iterator : ${factors} " >[(${f.code})]</th>
+                <th>Weight</th>
+            </tr>
+            </thead>
+            <tbody data-iterate="f" th:each="f, iterator : ${factors} " >
+            <tr >
+                <th>[(${f.code})]</th>
+                <td   data-iterate="fi" th:each="fi, iterator1 : ${factors} "  >
+
+                        <span  class="center-pill">[(${item.mtx[iterator.index][iterator1.index]})]</span>
+
+
+                </td>
+                <td>[(${item.weights[iterator.index]})]</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+    </section>
+    <section>
+    <section id="invoice-title-number">
+
+        <span id="title"> Calculation of the risk factor concentration  </span>
+        <p></p>
+        <span id="title">for each undesirable event</span>
+    </section>
+        <table >
+            <thead>
+            <tr>
+                <th>Undesirable event</th>
+                <th>Linked risk factor category</th>
+                <th>Factors of category Xi</th>
+                <th>Weighting:Yi</th>
+                <th>Xi*Yi</th>
+                <th>Fraction of total Eq</th>
+                <th>Probability of Occurence</th>
+                <th>Max Impact</th>
+                <th>Level of Risk</th>
+            </tr>
+            </thead>
+            <tbody   data-iterate="ev" th:each="ev, iterator : ${event} " >
+
+            <tr >
+                <td th:rowspan="${ev.factorProjets.size()+2}" >[(${ev.undesirableEvent.code})]</td>
+
+            </tr>
+            <tr data-iterate="f" th:each="f, iterator1 : ${ev.factorProjets} ">
+                <td>[(${f.factor.code})]</td>
+                <td>[(${f.sourceDangers.size()})]</td>
+                <td >[(${rank[f.factor.id]})]</td>
+                <td >[(${f.XY})]</td>
+                <td >--</td>
+                <td >--</td>
+                <td >--</td>
+                <td >--</td>
+
+            </tr>
+
+            <tr >
+                <td></td>
+                <td></td>
+
+                <td >Sub-Total [(${ev.undesirableEvent.code})]</td>
+                <td >[(${ev.XY})]</td>
+                <td >[(${ev.fractionTotal})]</td>
+                <td > [(${ev.probabilityOccurence})] </td>
+                <td > [(${ev.maxImpact})] </td>
+                <td > [(${ev.levelRisk})]</td>
+
+            </tr>
+
+            </tbody>
+            <tr >
+                <td></td>
+                <td></td>
+                <td></td>
+                <td >Total</td>
+                <td >[(${XY})]</td>
+                <td >100 %</td>
+
+            </tr>
+        </table>
+    </section>
+
+
+    <section  >
+        <section id="invoice-title-number">
+
+            <span id="title">Result :</span>
+            <span id="number">Limit ACCEPT = [(${limitAccept})]</span>
+
+        </section>
+        <table >
+            <thead>
+            <tr>
+                <th colspan="2"><h2>Accepted Risks </h2> </th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr >
+               <th>Code</th>
+                <th>Description</th>
+
+            </tr>
+
+            <tr data-iterate="ea" th:each="ea, iterator : ${accept} ">
+                <th>[(${ea.undesirableEvent.code})]</th>
+                <th>[(${ea.undesirableEvent.description})]</th>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+    </section>
+    <section  >
+        <section id="invoice-title-number">
+
+            <span id="title"></span>
+            <span id="number"></span>
+
+        </section>
+    <table  >
+        <thead>
+        <tr>
+            <th colspan="2"><h2>Risks to be reduced </h2> </th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr >
+            <th>Code</th>
+            <th>Description</th>
+
+        </tr>
+
+        <tr data-iterate="ea" th:each="ea, iterator : ${nonAccept} ">
+            <th>[(${ea.undesirableEvent.code})]</th>
+            <th>[(${ea.undesirableEvent.description})]</th>
+
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    </section>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+
+
+
 
 </div>
 
