@@ -26,7 +26,6 @@ public class UserController {
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public AppUser register1(){
         
-         System.out.println(userForm);
         AppRole appRole=new AppRole();
         appRole.setRoleName("ADMIN");
         appRoleRepository.save(appRole);
