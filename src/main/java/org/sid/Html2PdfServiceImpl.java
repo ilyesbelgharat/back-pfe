@@ -159,7 +159,7 @@ private ProjetRepository projetRepository;
         context.setVariable("date",sdf.format(today));
        // System.out.println(context.getVariable("event"));
         final String html = templateEngine.process("invoice", context);
-       // log.log(INFO, html);
+       log.log(INFO, html);
       //  final String DEST2=year+"/"+month+"/"+dayOfMonth+"::"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
 
         final String DEST1=projet.getNameProject().replace(' ','-')+"-"+year+"-"+month+"-"+dayOfMonth+"_"+cal.get(Calendar.HOUR_OF_DAY)+"-"+cal.get(Calendar.MINUTE)+"-"+cal.get(Calendar.SECOND)+".pdf";
