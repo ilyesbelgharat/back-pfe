@@ -159,9 +159,7 @@ private ProjetRepository projetRepository;
         context.setVariable("date",sdf.format(today));
        // System.out.println(context.getVariable("event"));
         final String html = templateEngine.process("invoice", context);
-        System.out.println("info html");
-       log.log(INFO, html);
-         System.out.println("info html");
+       // log.log(INFO, html);
       //  final String DEST2=year+"/"+month+"/"+dayOfMonth+"::"+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
 
         final String DEST1=projet.getNameProject().replace(' ','-')+"-"+year+"-"+month+"-"+dayOfMonth+"_"+cal.get(Calendar.HOUR_OF_DAY)+"-"+cal.get(Calendar.MINUTE)+"-"+cal.get(Calendar.SECOND)+".pdf";
@@ -170,7 +168,6 @@ private ProjetRepository projetRepository;
         try {
 
             HtmlConverter.convertToPdf(html, new FileOutputStream(DEST));
-        System.out.println("try");
 
 
 
@@ -180,7 +177,6 @@ private ProjetRepository projetRepository;
 
 
             File file=new File(DEST);
-        System.out.println("file dest");
 
             // javax.xml.crypto.Data data= (javax.xml.crypto.Data) file;
          //  System.out.println(data);
@@ -201,10 +197,7 @@ private ProjetRepository projetRepository;
             byte[] content = null;
             try {
                 content = Files.readAllBytes(path);
-                        System.out.println("try 2");
-
             } catch (final IOException e) {
-        System.out.println("exp 2");
 
             }
             MultipartFile result = new MockMultipartFile(name,
@@ -226,8 +219,6 @@ private ProjetRepository projetRepository;
 //return null ;
         } catch (IOException e) {
             log.log(SEVERE, e.getMessage(), e);
-                    System.out.println("exp 1");
-
             return null;
         }
     }
