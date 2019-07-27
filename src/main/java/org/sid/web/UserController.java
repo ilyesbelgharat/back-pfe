@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+import org.sid.dao.AppRoleRepository;
+import org.sid.entities.AppRole;
 
 import java.util.Date;
 import java.util.List;
