@@ -35,6 +35,7 @@ public class UploadController {
 	public @ResponseBody
 	 Photo handleFileUpload(@RequestParam("file") MultipartFile file) {
 		String s="";
+		String s1="";
 		 Photo image =new Photo();
 
 		
