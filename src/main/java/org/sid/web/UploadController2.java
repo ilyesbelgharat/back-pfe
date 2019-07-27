@@ -79,6 +79,7 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
 
 }
 
+
 	@RequestMapping(value ="/files/{nom}/{extension}", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<InputStreamResource> getFile(@PathVariable String nom,@PathVariable String extension)
 			throws IOException {
@@ -87,7 +88,6 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
 
 		String path="upload-dir/"+nom.replace(' ','-')+"."+extension;
 		File file=new File(path);
-		System.out.println(file);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
 		return ResponseEntity.ok()
@@ -101,6 +101,7 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
 
 
 	}
+	
 @Autowired
 private ProjetRepository projetRepository;
 
