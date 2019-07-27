@@ -24,7 +24,7 @@ public class UserController {
 
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public AppUser register1(){
-        return accountService.saveUser("ilyesblg", "1234", "1234", " " , " ", " ", " ", null, null);
+        return accountService.saveUser("admin", "1234", "1234", " " , " ", " ", " ", null, null);
     }
     
     @RequestMapping(value="/register",method= RequestMethod.POST)
