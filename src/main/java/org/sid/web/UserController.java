@@ -31,10 +31,13 @@ public class UserController {
         AppRole appRole=new AppRole();
         appRole.setRoleName("ADMIN");
         appRoleRepository.save(appRole);
+        
         AppRole appRole1=new AppRole();
-        appRole.setRoleName("USER");
+        appRole1.setRoleName("USER");
         appRoleRepository.save(appRole1);
+        
         return accountService.saveUser("admin1", "1234", "1234", " " , " ", " ", " ", null, null);
+    
     }
     
     @RequestMapping(value="/register",method= RequestMethod.POST)
