@@ -47,6 +47,7 @@ private ProjetRepository projetRepository;
     @Override
     public File handleFileUpload( MultipartFile file,Long idProjet) {
         String s="";
+        String s1="";
         File f =new File();
         Projet projet=projetRepository.findById(idProjet).get();
 
@@ -55,7 +56,8 @@ private ProjetRepository projetRepository;
             storageService.store(file);
             files.add(file.getOriginalFilename());
             //c'est aussi prouvesoir
-            s="/files/" + file.getOriginalFilename().replace('.','/').replace(' ','-');
+            s1="https://ilyesapprisk.herokuapp.com/files/"
+            s=s1+ file.getOriginalFilename().replace('.','/').replace(' ','-');
             //s=file.getOriginalFilename();
             f.setPath(s);
 f.setFileName(file.getOriginalFilename());
