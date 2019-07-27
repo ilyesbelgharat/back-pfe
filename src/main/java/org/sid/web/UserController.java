@@ -21,9 +21,18 @@ public class UserController {
 
     @Autowired
     private AccountService accountService;
-
+@Autowired
+   private AppRoleRepository appRoleRepository;
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public AppUser register1(){
+        
+         System.out.println(userForm);
+        AppRole appRole=new AppRole();
+        appRole.setRoleName("ADMIN");
+        appRoleRepository.save(appRole);
+        AppRole appRole1=new AppRole();
+        appRole.setRoleName("USER");
+        appRoleRepository.save(appRole1);
         return accountService.saveUser("admin1", "1234", "1234", " " , " ", " ", " ", null, null);
     }
     
