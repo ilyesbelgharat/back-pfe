@@ -5,7 +5,10 @@ import org.sid.dao.FileRepository;
 import org.sid.entities.*;
 import java.io.File;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.sid.dao.AppUserRepository;
 import org.sid.entities.AppUser;
 import org.sid.entities.Photo;
@@ -35,7 +38,11 @@ public class UserController {
     public int register1(){
                   System.out.println(Paths.get("").toAbsolutePath().toString());
 
+Path firstPath = Paths.get("/home/music/users.txt");
+    Path secondPath = Paths.get("/docs/status.txt");
 
+    System.out.println("exists: " + Files.exists(firstPath));
+    System.out.println("notExists: " + Files.notExists(firstPath));
        
 
                     return  1;
