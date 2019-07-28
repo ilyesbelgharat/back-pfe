@@ -3,6 +3,7 @@ package org.sid.web;
 import lombok.Data;
 import org.sid.dao.FileRepository;
 import org.sid.entities.*;
+import java.io.File;
 
 import org.sid.dao.AppUserRepository;
 import org.sid.entities.AppUser;
@@ -30,6 +31,16 @@ public class UserController {
    private AppRoleRepository appRoleRepository;
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public int register1(){
+          File temp;
+        try
+        {
+            temp = File.createTempFile("myTempFile", ".txt");
+            boolean exists = temp.exists();
+            System.out.println("Temp file exists : " + exists);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation());
 System.out.println(System.getProperty("user.dir"));
 
