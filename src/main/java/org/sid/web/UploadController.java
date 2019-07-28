@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.sid.services.S3Services;
 
 
 
@@ -29,7 +30,8 @@ public class UploadController {
 	@Autowired
 	private PhotoMetier IMI;
 	List<String> files = new ArrayList<String>();
-	
+	@Autowired
+	private S3Services s3Services;
  
 	 @RequestMapping(value="/photos",headers = "Content-Type= multipart/form-data",method=RequestMethod.POST)
 	public @ResponseBody
@@ -41,7 +43,7 @@ public class UploadController {
 		
 		
 		try {
-			storageService.store(file);
+			s3Services.uploadFile(file.getOriginalFilename(), file);
 			files.add(file.getOriginalFilename());
 			//c'est aussi prouvesoir
 		   s1="https://ilyesapprisk.herokuapp.com/image/";
