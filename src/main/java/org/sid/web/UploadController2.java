@@ -98,8 +98,8 @@ String path=nom+"."+extension;
 		//il faut modifier ce path le jour ou tu vas déploier ton app sur un serveur
 			String nameFile=nom+".pdf";
 
-		File file=new File(nameFile);
-		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+		//File file=new File(nameFile);
+		//InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 		ByteArrayOutputStream downloadInputStream = s3Services.downloadFile(nameFile);
 		
 		return ResponseEntity.ok()
