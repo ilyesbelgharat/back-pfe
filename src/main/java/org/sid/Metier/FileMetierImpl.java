@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.sid.services.S3Services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
 public class FileMetierImpl implements FileMetier {
     @Autowired
     private FileRepository fileRepository;
+    @Autowired
+private S3Services s3Services;
     @Autowired
     StorageService storageService;
     List<String> files = new ArrayList<String>();
@@ -53,7 +56,7 @@ private ProjetRepository projetRepository;
 
 
         try {
-            storageService.store(file);
+            s3Services.uploadFile(file.getOriginalFilename(),file);
             files.add(file.getOriginalFilename());
             //c'est aussi prouvesoir
             s1="https://ilyesapprisk.herokuapp.com/files/";
