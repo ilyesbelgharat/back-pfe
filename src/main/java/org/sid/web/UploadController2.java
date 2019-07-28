@@ -64,7 +64,7 @@ public class UploadController2 {
 
   
 @RequestMapping(value ="/image/{nom}/{extension}", method = RequestMethod.GET)
-public @ResponseBody void getImage(HttpServletResponse response,@PathVariable String nom,@PathVariable String extension)
+public @ResponseBody ResponseEntity<byte[]> getImage(HttpServletResponse response,@PathVariable String nom,@PathVariable String extension)
         throws IOException, URISyntaxException {
 	//il faut modifier ce path le jour ou tu vas déploier ton app sur un serveur
 
@@ -75,18 +75,19 @@ String path=nom+"."+extension;
 			.contentType(contentType(path))
 			.header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + path + "\"")
 			.body(downloadInputStream.toByteArray());
-	System.out.println(path);
+	return file;
+	//System.out.println(path);
 	
-	System.out.println(file);
+	//System.out.println(file);
 
-	BufferedImage image = ImageIO
-            .read((ImageInputStream) file);
+//	BufferedImage image = ImageIO
+      //      .read((ImageInputStream) file);
 
    // response.setContentType("image/jpg");
-    OutputStream out;
+   // OutputStream out;
 
-    out = response.getOutputStream();
-    ImageIO.write(image,extension, out);
+    //out = response.getOutputStream();
+    //ImageIO.write(image,extension, out);
 
 }
 
