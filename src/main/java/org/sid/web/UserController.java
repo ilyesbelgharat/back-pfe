@@ -38,7 +38,7 @@ public class UserController {
     public int register1(){
                   System.out.println(Paths.get("").toAbsolutePath().toString());
 
-Path firstPath = Paths.get("/app");
+Path firstPath = Paths.get("/app/upload-dir");
 
     System.out.println("exists: " + Files.exists(firstPath));
        
