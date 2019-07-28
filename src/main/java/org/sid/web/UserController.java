@@ -36,7 +36,6 @@ public class UserController {
                   System.out.println(Paths.get("").toAbsolutePath().toString());
 
 
-        System.out.println("Temp file exists : " + exists);
        
 
                     return  1;
