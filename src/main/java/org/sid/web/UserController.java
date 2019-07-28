@@ -38,11 +38,9 @@ public class UserController {
     public int register1(){
                   System.out.println(Paths.get("").toAbsolutePath().toString());
 
-Path firstPath = Paths.get("/home/music/users.txt");
-    Path secondPath = Paths.get("/docs/status.txt");
+Path firstPath = Paths.get("/app");
 
     System.out.println("exists: " + Files.exists(firstPath));
-    System.out.println("notExists: " + Files.notExists(firstPath));
        
 
                     return  1;
