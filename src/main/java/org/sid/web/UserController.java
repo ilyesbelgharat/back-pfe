@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.sid.dao.AppRoleRepository;
 import org.sid.entities.AppRole;
+import java.nio.file.Paths;
 
 import java.util.Date;
 import java.util.List;
@@ -32,8 +33,8 @@ public class UserController {
    private AppRoleRepository appRoleRepository;
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public int register1(){
-          File tmpDir = new File("/var/tmp");
-        boolean exists = tmpDir.exists();
+                  System.out.println(Paths.get("").toAbsolutePath().toString());
+
 
         System.out.println("Temp file exists : " + exists);
        
