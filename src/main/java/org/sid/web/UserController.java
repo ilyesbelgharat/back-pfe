@@ -4,6 +4,7 @@ import lombok.Data;
 import org.sid.dao.FileRepository;
 import org.sid.entities.*;
 import java.io.File;
+import java.io.IOException;
 
 import org.sid.dao.AppUserRepository;
 import org.sid.entities.AppUser;
