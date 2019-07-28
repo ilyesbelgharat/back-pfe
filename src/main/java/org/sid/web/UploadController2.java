@@ -75,9 +75,11 @@ String path=nom+"."+extension;
 			.contentType(contentType(path))
 			.header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + path + "\"")
 			.body(downloadInputStream.toByteArray());
+	System.out.println(path);
 	
-	
-    BufferedImage image = ImageIO
+	System.out.println(file);
+
+	BufferedImage image = ImageIO
             .read((ImageInputStream) file);
 
    // response.setContentType("image/jpg");
