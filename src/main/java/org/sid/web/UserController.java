@@ -29,19 +29,12 @@ public class UserController {
 @Autowired
    private AppRoleRepository appRoleRepository;
  @RequestMapping(value="/register1",method= RequestMethod.POST)
-    public AppUser register1(){
-        
-        AppRole appRole=new AppRole();
-        appRole.setRoleName("ADMIN");
-        appRoleRepository.save(appRole);
-        
-        AppRole appRole1=new AppRole();
-        appRole1.setRoleName("USER");
-        appRoleRepository.save(appRole1);
-        
-        return accountService.saveUser("badri", "1234", "1234", " " , " ", " ", " ", null, null);
-    
-    }
+    public int register1(){
+        System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation());
+System.out.println(System.getProperty("user.dir"));
+
+                    return  1;
+            }
     
     @RequestMapping(value="/register",method= RequestMethod.POST)
     public AppUser register(@RequestBody UserForm userForm){
