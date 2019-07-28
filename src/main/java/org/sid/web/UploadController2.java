@@ -7,6 +7,7 @@ import org.sid.dao.FileRepository;
 import org.sid.dao.ProjetRepository;
 import org.sid.entities.Photo;
 import org.sid.entities.Projet;
+import org.sid.services.S3Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -46,6 +47,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 @RestController
 @CrossOrigin("*")
@@ -123,6 +125,39 @@ private FileRepository fileRepository;
 		System.out.println(idFile);
 		//fileMetier.deleteFile(idFile);
 	}
+	
+	
+	
+		@Autowired
+	S3Services s3Services;
+	@PostMapping("/api/file/upload")
+	public String uploadMultipartFile(@RequestParam("keyname") String keyName, @RequestParam("uploadfile") MultipartFile file) {
+		s3Services.uploadFile(keyName, file);
+		return "Upload Successfully. -> KeyName = " + keyName;
+	}
+
+	@GetMapping("/api/file/{keyname}")
+	public ResponseEntity<byte[]> downloadFile(@PathVariable String keyname) {
+		ByteArrayOutputStream downloadInputStream = s3Services.downloadFile(keyname);
+
+		return ResponseEntity.ok()
+				.contentType(contentType(keyname))
+				.header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + keyname + "\"")
+				.body(downloadInputStream.toByteArray());
+	}
+
+	private MediaType contentType(String keyname) {
+		String[] arr = keyname.split("\\.");
+		String type = arr[arr.length-1];
+		switch(type) {
+			case "txt": return MediaType.TEXT_PLAIN;
+			case "png": return MediaType.IMAGE_PNG;
+			case "jpg": return MediaType.IMAGE_JPEG;
+			case "pdf": return MediaType.APPLICATION_PDF;
+			default: return MediaType.APPLICATION_OCTET_STREAM;
+		}
+	}
+
 
 }
 
