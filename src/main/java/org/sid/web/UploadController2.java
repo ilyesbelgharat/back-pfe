@@ -67,11 +67,17 @@ public @ResponseBody void getImage(HttpServletResponse response,@PathVariable St
         throws IOException, URISyntaxException {
 	//il faut modifier ce path le jour ou tu vas déploier ton app sur un serveur
 
-	String path="/app/upload-dir/"+nom+"."+extension;
+String path=nom+"."+extension;
+	ByteArrayOutputStream downloadInputStream = s3Services.downloadFile(path);
 
-
+	ResponseEntity<byte[]> file=ResponseEntity.ok()
+			.contentType(contentType(path))
+			.header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + path + "\"")
+			.body(downloadInputStream.toByteArray());
+	
+	
     BufferedImage image = ImageIO
-            .read(new File(path));
+            .read((ImageInputStream) file);
 
    // response.setContentType("image/jpg");
     OutputStream out;
