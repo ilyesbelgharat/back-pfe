@@ -93,24 +93,19 @@ String path=nom+"."+extension;
 
 
 	@RequestMapping(value ="/files/{nom}/{extension}", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<InputStreamResource> getFile(@PathVariable String nom,@PathVariable String extension)
+	public @ResponseBody ResponseEntity<byte[]> getFile(@PathVariable String nom,@PathVariable String extension)
 			throws IOException {
 		//il faut modifier ce path le jour ou tu vas déploier ton app sur un serveur
 			String nameFile=nom+".pdf";
 
-		String path="upload-dir/"+nom.replace(' ','-')+"."+extension;
-		File file=new File(path);
+		File file=new File(nameFile);
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-
+		ByteArrayOutputStream downloadInputStream = s3Services.downloadFile(nameFile);
+		
 		return ResponseEntity.ok()
-				// Content-Disposition
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
-				// Content-Type
-				.contentType(MediaType.valueOf("application/pdf"))
-				// Contet-Length
-				.contentLength(file.length()) //
-				.body(resource);
-
+				.contentType(contentType(nameFile))
+				.header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + nameFile + "\"")
+				.body(downloadInputStream.toByteArray());
 
 	}
 	
