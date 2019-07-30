@@ -30,12 +30,19 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        System.out.println(username);
+          System.out.println(username);
         System.out.println(roleName);
-       List<AppRole> appRoles= (List<AppRole>) appRoleRepository.findByRoleName(roleName);
-        
-        
-        AppRole appRole=appRoles.get(0);
+         
+        List<AppRole> appRoles=appRoleRepository.findAll();
+        for (int i=0;i<appRoles.size();i++){
+                if(appRoles.get(i).getRoleName()=="USER" ){
+                    appRoleRepository.delete(appRoles.get(i));
+                }    
+        }
+        AppRole appRole1=new AppRole();
+        appRole1.setRoleName("USER");
+        appRoleRepository.save(appRole1);
+        AppRole appRole=appRoleRepository.findByRoleName(roleName);
         System.out.println(appRole);
 
         AppUser appUser=appUserRepository.findByUsername(username);
