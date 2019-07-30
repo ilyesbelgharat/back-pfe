@@ -37,6 +37,9 @@ public class UserController {
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public int register1(){
         
+            AppUser appUser=appUserRepository.findByUsername("paulpatrice");
+        System.out.println(appUser);
+        
               List<AppRole> appRoles=appRoleRepository.findAll();
        for (int i=0;i<appRoles.size();i++){
                 if(appRoles.get(i).getRoleName().equals("USER") ){
