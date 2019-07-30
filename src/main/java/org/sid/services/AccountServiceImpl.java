@@ -33,14 +33,14 @@ public class AccountServiceImpl implements AccountService {
           System.out.println(username);
         System.out.println(roleName);
          
-         List<AppRole> appRoles=appRoleRepository.findAll();
-       for (int i=0;i<appRoles.size();i++){
-                if(appRoles.get(i).getRoleName().equals("USER") ){
-                    appRoleRepository.delete(appRoles.get(i));
-             }
-        }
-         AppRole appRole1=new AppRole();
-        appRole1.setRoleName("USER");
+     //    List<AppRole> appRoles=appRoleRepository.findAll();
+     //  for (int i=0;i<appRoles.size();i++){
+       //         if(appRoles.get(i).getRoleName().equals("USER") ){
+              //      appRoleRepository.delete(appRoles.get(i));
+       ////      }
+        //}
+        // AppRole appRole1=new AppRole();
+        //appRole1.setRoleName("USER");
         //appRoleRepository.save(appRole1);
         
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
