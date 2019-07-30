@@ -38,16 +38,11 @@ public class UserController {
     public int register1(){
         
        
-        
-              List<AppRole> appRoles=appRoleRepository.findAll();
-        System.out.println(appRoles);
-       for (int i=0;i<appRoles.size();i++){
-                           if(appRoles.get(i).getRoleName()!=null ){
+ 
+            AppUser appUser=appUserRepository.findByUsername("paulpatrice");
+        System.out.println(appUser);
+            appUserRepository.delete(appUser);
 
-                if(appRoles.get(i).getRoleName().equals("USER") ){
-                    appRoleRepository.delete(appRoles.get(i));
-             }}
-        }
 
                     return  1;
             }
