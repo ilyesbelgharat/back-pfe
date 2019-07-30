@@ -39,9 +39,9 @@ public class AccountServiceImpl implements AccountService {
               //      appRoleRepository.delete(appRoles.get(i));
        ////      }
         //}
-        // AppRole appRole1=new AppRole();
-        //appRole1.setRoleName("USER");
-        //appRoleRepository.save(appRole1);
+        /AppRole appRole1=new AppRole();
+        appRole1.setRoleName("USER");
+        appRoleRepository.save(appRole1);
         
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
         System.out.println(appRole);
