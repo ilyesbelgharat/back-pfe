@@ -36,12 +36,13 @@ public class UserController {
    private AppRoleRepository appRoleRepository;
  @RequestMapping(value="/register1",method= RequestMethod.POST)
     public int register1(){
-                  System.out.println(Paths.get("").toAbsolutePath().toString());
-
-Path firstPath = Paths.get("/app/upload-dir/ilye.jpg");
-
-    System.out.println("exists: " + Files.exists(firstPath));
-       
+        
+              List<AppRole> appRoles=appRoleRepository.findAll();
+       for (int i=0;i<appRoles.size();i++){
+                if(appRoles.get(i).getRoleName().equals("USER") ){
+                    appRoleRepository.delete(appRoles.get(i));
+             }
+        }
 
                     return  1;
             }
