@@ -34,11 +34,11 @@ public class AccountServiceImpl implements AccountService {
         System.out.println(roleName);
          
          List<AppRole> appRoles=appRoleRepository.findAll();
-        for (int i=0;i<appRoles.size();i++){
-                if(appRoles.get(i).getRoleName()=="USER" ){
+      //  for (int i=0;i<appRoles.size();i++){
+           //     if(appRoles.get(i).getRoleName()=="USER" ){
                  //   appRoleRepository.delete(appRoles.get(i));
-                }
-        }
+             //   }
+      //  }
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
         System.out.println(appRole);
 
