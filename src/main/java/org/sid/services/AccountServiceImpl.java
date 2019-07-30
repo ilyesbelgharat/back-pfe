@@ -1,5 +1,6 @@
 package org.sid.services;
 
+import com.amazonaws.services.opsworks.model.App;
 import org.sid.dao.AppRoleRepository;
 import org.sid.dao.AppUserRepository;
 import org.sid.entities.AppRole;
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
-
 @Service
 @Transactional
 public class AccountServiceImpl implements AccountService {
@@ -36,7 +36,7 @@ public class AccountServiceImpl implements AccountService {
          List<AppRole> appRoles=appRoleRepository.findAll();
         for (int i=0;i<appRoles.size();i++){
                 if(appRoles.get(i).getRoleName()=="USER" ){
-                    appRoleRepository.delete(appRoles.get(i));
+                 //   appRoleRepository.delete(appRoles.get(i));
                 }
         }
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
