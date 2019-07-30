@@ -32,8 +32,10 @@ public class AccountServiceImpl implements AccountService {
     public void addRoleToUser(String username, String roleName) {
         System.out.println(username);
         System.out.println(roleName);
-
-        AppRole appRole=appRoleRepository.findByRoleName(roleName);
+       List<AppRole> appRoles= (List<AppRole>) appRoleRepository.findByRoleName(roleName);
+        
+        
+        AppRole appRole=appRoles.get(0);
         System.out.println(appRole);
 
         AppUser appUser=appUserRepository.findByUsername(username);
@@ -43,6 +45,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AppUser saveUser(String username, String password, String confirmedPassword, String email, String lastName, String firstName, String poste, Date birthDate, Photo photo) {
+      
+        
+        
         AppUser user= appUserRepository.findByUsername(username);
         if(user!=null) throw new RuntimeException("User Already exists");
         if(!password.equals(confirmedPassword)) throw new RuntimeException("Please confirm your password");
@@ -63,7 +68,11 @@ public class AccountServiceImpl implements AccountService {
         System.out.println(appUser);
         appUserRepository.save(appUser);
 
-       // addRoleToUser(username,"USER");
+        
+        
+        
+        
+        addRoleToUser(username,"USER");
 
         return appUserRepository.save(appUser);
 
