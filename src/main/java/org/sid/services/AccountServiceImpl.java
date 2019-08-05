@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+
 @Service
 @Transactional
 public class AccountServiceImpl implements AccountService {
@@ -30,19 +31,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-          System.out.println(username);
-        System.out.println(roleName);
-         
-     //    List<AppRole> appRoles=appRoleRepository.findAll();
-     //  for (int i=0;i<appRoles.size();i++){
-       //         if(appRoles.get(i).getRoleName().equals("USER") ){
-              //      appRoleRepository.delete(appRoles.get(i));
-       ////      }
-        //}
-       // AppRole appRole1=new AppRole();
-        //appRole1.setRoleName("USER");
-        //appRoleRepository.save(appRole1);
-        
+
+
         AppRole appRole=appRoleRepository.findByRoleName(roleName);
         System.out.println(appRole);
 
@@ -53,9 +43,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AppUser saveUser(String username, String password, String confirmedPassword, String email, String lastName, String firstName, String poste, Date birthDate, Photo photo) {
-      
-        
-        
         AppUser user= appUserRepository.findByUsername(username);
         if(user!=null) throw new RuntimeException("User Already exists");
         if(!password.equals(confirmedPassword)) throw new RuntimeException("Please confirm your password");
@@ -75,12 +62,10 @@ public class AccountServiceImpl implements AccountService {
         appUser.setPassword(bCryptPasswordEncoder.encode(password));
         System.out.println(appUser);
         appUserRepository.save(appUser);
+        System.out.println("33333333333");
 
-        
-        
-        
-        
         addRoleToUser(username,"USER");
+        System.out.println("444444444444444444");
 
         return appUserRepository.save(appUser);
 
