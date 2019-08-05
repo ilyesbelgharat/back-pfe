@@ -79,7 +79,43 @@ private FactorProjetRepository factorProjetRepository;
         projet.setUserCreation(appUser);
         System.out.println(projet);
      //   projet.set
+
         ProjetR.save(projet);
+        IntervalScale intervalScale0=new IntervalScale();
+        intervalScale0.setMin((float) 0);
+        intervalScale0.setMax((float)0.15);
+        intervalScale0.setValeur((float)0.1);
+        this.addIntervalToProjet(projet.getId(),intervalScale0);
+
+        IntervalScale intervalScale1=new IntervalScale();
+        intervalScale1.setMin((float)0.16);
+        intervalScale1.setMax((float)0.25);
+        intervalScale1.setValeur((float)0.3);
+        this.addIntervalToProjet(projet.getId(),intervalScale1);
+
+        IntervalScale intervalScale2=new IntervalScale();
+
+        intervalScale2.setMin((float)0.26);
+        intervalScale2.setMax((float)0.5);
+        intervalScale2.setValeur((float)0.5);
+        this.addIntervalToProjet(projet.getId(),intervalScale2);
+
+        IntervalScale intervalScale3=new IntervalScale();
+
+        intervalScale3.setMin((float)0.51);
+        intervalScale3.setMax((float)0.75);
+        intervalScale3.setValeur((float)0.7);
+        this.addIntervalToProjet(projet.getId(),intervalScale3);
+
+        IntervalScale intervalScale4=new IntervalScale();
+
+        intervalScale4.setMin((float)0.76);
+        intervalScale4.setMax((float)0.9);
+        intervalScale4.setValeur((float)0.9);
+        this.addIntervalToProjet(projet.getId(),intervalScale4);
+
+
+
         return id;
     }
 
@@ -122,10 +158,10 @@ private FactorProjetRepository factorProjetRepository;
                 ProjetR.save(projet);
                 return;
             }
-
         }
-
     }
+
+
     public Projet addIntervalToProjet(Long idProjet, IntervalScale intervalScale){
         Projet projet=this.getProjetById(idProjet);
         IntervalScale intervalScale1=intervalScaleMetier.saveIntervalScale(intervalScale);
@@ -137,7 +173,6 @@ private FactorProjetRepository factorProjetRepository;
 
             projet.setProbabilityScale(probabilityScale);
             ProjetR.save(projet);
-
         }
         else{
             projet.getProbabilityScale().getIntervalScales().add(intervalScale);
@@ -146,6 +181,8 @@ private FactorProjetRepository factorProjetRepository;
         }
         return  projet;
     }
+
+
 
     @Override
     public Projet updateImpactScaleMinor(Long idProjet, Integer min, Integer max) {
@@ -289,7 +326,7 @@ for (int i=0;i<eventProjets.size();i++) {
         return ProjetR.save(projet);
     }
 
-    // set proba occurence + max impact d'un projet
+    // set proba occurence + max impact d'un projet+LevelRisk
     @Override
     public Projet probOccurence(Long idProjet) {
         Projet projet=ProjetR.findById(idProjet).get();
@@ -300,7 +337,6 @@ for (int i=0;i<eventProjets.size();i++) {
             eventProjet.setProbabilityOccurence((float) point);
             Map<Long,Integer> map= eventProjet.getEstimationImpact();
             double max=eventProjetMetier.maxValueMap(map);
-            System.out.println(max);
             eventProjet.setMaxImpact(max);
             eventProjet.setLevelRisk((float) (max*point));
             eventProjetRepository.save(eventProjet);
